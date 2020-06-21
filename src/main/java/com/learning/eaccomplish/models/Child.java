@@ -18,6 +18,6 @@ public class Child {
 
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "report")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "child")
     private List<Report> reports;
 }
