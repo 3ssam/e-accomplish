@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     private String state;
 

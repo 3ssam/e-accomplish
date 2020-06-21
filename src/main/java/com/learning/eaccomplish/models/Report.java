@@ -12,7 +12,7 @@ import java.util.List;
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     private int numOfWrong;
 
