@@ -18,4 +18,8 @@ public class User implements Serializable {
     private String name;
 
     private String password;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id",referencedColumnName = "id")
+    private Role role;
 }

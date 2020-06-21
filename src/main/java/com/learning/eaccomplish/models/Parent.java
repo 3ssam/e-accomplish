@@ -15,6 +15,8 @@ public class Parent extends User{
 
     private String email;
 
+    private boolean isFullChild;
+
     @OneToOne(fetch = FetchType.LAZY)
     private Payment payment;
 
