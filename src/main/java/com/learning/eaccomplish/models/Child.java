@@ -9,15 +9,12 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-public class Child {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
-    private String name;
-
-    private String password;
+public class Child extends User {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "child")
     private List<Report> reports;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id", referencedColumnName = "id")
+    private Parent parent;
 }

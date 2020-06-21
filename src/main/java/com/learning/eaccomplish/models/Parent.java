@@ -4,25 +4,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Setter
 @Getter
 @Entity
-public class Parent {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
-    private String name;
+public class Parent extends User{
 
     private Boolean activated;
 
     private String email;
 
-    private String password;
-
     @OneToOne(fetch = FetchType.LAZY)
     private Payment payment;
 
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
+    private List<Child> children;
 }
