@@ -15,4 +15,17 @@ public class testController {
         model.addAttribute("name","Mohamed Essam");
         return "test";
     }
+
+    @GetMapping("/admin")
+    public String getAdmin(Model model){
+        model.addAttribute("name","Islam");
+        return "adminPage";
+    }
+
+    @GetMapping("/user")
+    public String getUser(Model model){
+        model.addAttribute("name","Ahmed");
+        return "UserPage";
+    }
+
 }
