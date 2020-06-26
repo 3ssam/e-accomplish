@@ -4,16 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Setter
 @Getter
 @Entity
 public class Parent extends User{
-
-    private Boolean activated;
-
-    private String email;
 
     private boolean isFullChild;
 

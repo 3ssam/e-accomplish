@@ -23,4 +23,7 @@ public class Quiz {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "quiz")
     private List<Report> reports;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lastQuiz")
+    private List<Child> children;
+
 }

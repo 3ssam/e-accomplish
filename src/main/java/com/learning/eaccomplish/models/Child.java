@@ -9,7 +9,15 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-public class Child extends User {
+public class Child {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    private String name;
+
+    private String pinCode;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "child")
     private List<Report> reports;
@@ -17,4 +25,13 @@ public class Child extends User {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Parent parent;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "quiz_id", referencedColumnName = "id")
+    private Quiz lastQuiz;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "question_id", referencedColumnName = "id")
+    private Question lastQuestion;
+
 }
