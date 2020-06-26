@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface ChildRepository extends JpaRepository<Child, Long> {
-    Child getByNameAndPinCode(String name,String pinCode);
-
+    Child getByNameAndPinCodeAndParent(String name,String pinCode,Parent parent);
+    
     List<Child> findAllByParent(Parent parent);
 }

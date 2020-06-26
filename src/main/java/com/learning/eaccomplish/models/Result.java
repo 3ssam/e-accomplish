@@ -18,7 +18,7 @@ public class Result {
     @OneToOne()
     private Question question;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "report_id", referencedColumnName = "id")
     private Report report;
 

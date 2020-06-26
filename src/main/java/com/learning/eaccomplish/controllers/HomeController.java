@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
-@SessionAttributes({"signupUser", "islogin"})
+@SessionAttributes({"signupUser", "islogin","currentChild"})
 public class HomeController {
 
     @Autowired
@@ -38,16 +38,29 @@ public class HomeController {
         if (result.hasErrors())
             return "AddChild";
         Parent parent = CurrentUser.getUser();
-        childService.createChild(child,parent);
+        childService.createChild(child, parent);
         return "HomePage";
     }
 
+    @PostMapping("login/child")
+    public String childLogin(@Valid Child child, Model model) {
+        Parent parent = parentService.getParent(CurrentUser.getId());
+        Child existChild = childService.getChild(child.getName(), child.getPinCode(), parent);
+        if (existChild == null) {
+            model.addAttribute("LoginError", true);
+            return "OpenQuiz";
+        }
+        model.addAttribute("currentChild", existChild);
+        return "HomePage";
+    }
+
+
     @PostMapping("/payment")
-    public String addPayment(@Valid Payment payment,  BindingResult result, Model model) {
+    public String addPayment(@Valid Payment payment, BindingResult result, Model model) {
         if (result.hasErrors())
             return "EditPayment";
         Parent parent = CurrentUser.getUser();
-        paymentService.EditPayment(payment,parent);
+        paymentService.EditPayment(payment, parent);
         //Payment tempPayment = paymentService.getPaymentByParent(parent);
         return "HomePage";
     }
@@ -56,7 +69,7 @@ public class HomeController {
     public String deactivatedPayment(@RequestParam(required = false) boolean active, Model model) {
         Parent parent = CurrentUser.getUser();
         Payment payment = CurrentUser.getUser().getPayment();
-        paymentService.cancelPayment(payment,parent);
+        paymentService.cancelPayment(payment, parent);
         return "HomePage";
     }
 
@@ -84,16 +97,14 @@ public class HomeController {
             }
             model.addAttribute("payment", payment);
             return "EditPayment";
-        }
-        else if (choose.equalsIgnoreCase("Children")){
+        } else if (choose.equalsIgnoreCase("Children")) {
             List<Child> childrens = parent.getChildren();
             model.addAttribute("childrens", childrens);
             model.addAttribute("isFull", false);
 
             return "ShowChildern";
-        }
-        else if (choose.equalsIgnoreCase("addChild")){
-            if (parent.getChildren().size() == 2){
+        } else if (choose.equalsIgnoreCase("addChild")) {
+            if (parent.getChildren().size() == 2) {
                 List<Child> childrens = parent.getChildren();
                 model.addAttribute("childrens", childrens);
                 model.addAttribute("isFull", true);
@@ -102,6 +113,11 @@ public class HomeController {
             Child child = new Child();
             model.addAttribute("child", child);
             return "AddChild";
+        } else if (choose.equalsIgnoreCase("Quiz")) {
+            Child child = new Child();
+            model.addAttribute("child", child);
+            model.addAttribute("LoginError", false);
+            return "OpenQuiz";
         }
         return "HomePage";
     }

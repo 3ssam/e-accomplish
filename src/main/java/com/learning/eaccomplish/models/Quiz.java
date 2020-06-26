@@ -18,7 +18,7 @@ public class Quiz {
 
     private String Level;
 
-    @OneToMany(mappedBy = "quiz",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "quiz",fetch = FetchType.EAGER)
     private List<Question> questions = new ArrayList<>();
 
     @OneToMany(mappedBy = "quiz",fetch = FetchType.LAZY)
