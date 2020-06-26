@@ -1,24 +1,23 @@
 package com.learning.eaccomplish.security;
 
-import com.learning.eaccomplish.models.User;
+import com.learning.eaccomplish.models.Parent;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Set;
 
 public class MyUserDetails implements UserDetails {
 
-    private User user;
+    private Parent user;
     private long id;
     private String name;
     private String email;
     private String password;
     private boolean activated;
 
-    public MyUserDetails(User user) {
+    public MyUserDetails(Parent user) {
         this.user = user;
         this.id = user.getId();
         this.name = user.getName();
@@ -74,7 +73,7 @@ public class MyUserDetails implements UserDetails {
         return activated;
     }
 
-    public User getUser() {
+    public Parent getUser() {
         return user;
     }
 

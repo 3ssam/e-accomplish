@@ -1,7 +1,7 @@
 package com.learning.eaccomplish.security;
 
-import com.learning.eaccomplish.models.User;
-import com.learning.eaccomplish.repositories.UserRepository;
+import com.learning.eaccomplish.models.Parent;
+import com.learning.eaccomplish.repositories.ParentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,14 +12,14 @@ import org.springframework.stereotype.Service;
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private ParentRepository parentRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username);
-        if (user == null)
+        Parent parent = parentRepository.findByEmail(username);
+        if (parent == null)
             throw new UsernameNotFoundException("this username is not exist");
-        return new MyUserDetails(user);
+        return new MyUserDetails(parent);
     }
 
 }

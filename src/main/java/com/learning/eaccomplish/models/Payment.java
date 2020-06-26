@@ -41,7 +41,7 @@ public class Payment {
 
     private boolean active;
 
-    @OneToOne(mappedBy = "payment",fetch = FetchType.LAZY)
+    @OneToOne()
     private Parent parent;
 
 }
