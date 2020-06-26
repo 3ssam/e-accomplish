@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Add User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
+</head>
+
+<body>
+<div class="container my-5">
+    <h3> Home Menu</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+                <a href="/edit/parent?choose=Deactivated" class="btn btn-primary" style="margin: 1%">Deactivated account</a>
+            </div>
+            <div class="col-md-10">
+                <a href="/edit/parent?choose=Payment" class="btn btn-primary" style="margin: 1%">Edit Payment</a>
+            </div>
+            <div class="col-md-10">
+                <a href="/edit/parent?choose=Children" class="btn btn-primary" style="margin: 1%">Check Children Information</a>
+            </div>
+            <div class="col-md-10">
+                <a href="/edit/parent?choose=Quiz" class="btn btn-primary" style="margin: 1%">Start Quiz</a>
+            </div>
+            <div class="col-md-10">
+                <a href="/logout" class="btn btn-primary" style="margin: 1%">Logout</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="deactivated">
+    </div>
+
+</div>
+</body>
+
+</html>
