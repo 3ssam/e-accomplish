@@ -24,7 +24,7 @@ public class User implements Serializable {
     private String password;
 
     @NotNull(message = "This field is required field")
-    private Boolean activated;
+    private Boolean activated = true;
 
     @NotBlank(message = "This field is required field")
     private String name;
