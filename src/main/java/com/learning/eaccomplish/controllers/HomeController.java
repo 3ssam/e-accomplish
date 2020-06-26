@@ -1,8 +1,11 @@
 package com.learning.eaccomplish.controllers;
 
+import com.learning.eaccomplish.models.Child;
 import com.learning.eaccomplish.models.Parent;
 import com.learning.eaccomplish.models.Payment;
+import com.learning.eaccomplish.repositories.ChildRepository;
 import com.learning.eaccomplish.security.CurrentUser;
+import com.learning.eaccomplish.services.ChildService;
 import com.learning.eaccomplish.services.ParentService;
 import com.learning.eaccomplish.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +27,20 @@ public class HomeController {
     @Autowired
     private PaymentService paymentService;
 
+    @Autowired
+    private ChildService childService;
 
-//    @PostMapping("/parent")
-//    public String addParent(@Valid Parent parent, @RequestParam(required = false) Boolean active, BindingResult result, Model model) {
-//        if (result.hasErrors())
-//            return "AddParent";
-//        Parent as = (Parent) model.getAttribute("currentUser");
-//
-//        return "AddPayment";
-//    }
-//
+
+    @PostMapping("/child")
+    public String addParent(@Valid Child child, BindingResult result, Model model) {
+        if (result.hasErrors())
+            return "AddChild";
+        Parent parent = CurrentUser.getUser();
+        childService.createChild(child,parent);
+        //parentService.addChild(child,parent);
+        return "HomePage";
+    }
+
     @PostMapping("/payment")
     public String addPayment(@Valid Payment payment,  BindingResult result, Model model) {
         if (result.hasErrors())
@@ -51,7 +58,6 @@ public class HomeController {
         paymentService.cancelPayment(payment,parent);
         return "HomePage";
     }
-
 
     @GetMapping()
     public String home(@RequestParam(required = false) String choose, Model model) {
@@ -78,7 +84,11 @@ public class HomeController {
             model.addAttribute("payment", payment);
             return "EditPayment";
         }
-//        else if (choose.equalsIgnoreCase("Children"));
+        else if (choose.equalsIgnoreCase("Children")){
+            Child child = new Child();
+            model.addAttribute("child", child);
+            return "AddChild";
+        }
 //        else if (choose.equalsIgnoreCase("Quiz"));
         return "HomePage";
     }

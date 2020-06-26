@@ -19,14 +19,13 @@ public class PaymentService {
 
     @Transactional
     public void createPayment(Payment payment,Parent parent) {
-        payment.setActive(true);
         paymentRepository.save(payment);
         parent.setPayment(payment);
         parentRepository.save(parent);
     }
 
     public Payment getPayment(Long id) {
-        Payment payment = paymentRepository.getOne(id);
+        Payment payment = paymentRepository.findById(id).get();
         if (payment == null)
             throw new IllegalArgumentException("Invalid Payment Id:" + id);
         return payment;
@@ -34,8 +33,6 @@ public class PaymentService {
 
     public Payment getPaymentByParent(Parent parent) {
         Payment payment = paymentRepository.getByParent(parent);
-        if (payment == null)
-            throw new IllegalArgumentException("Invalid Payment");
         return payment;
     }
 
@@ -50,9 +47,19 @@ public class PaymentService {
 
     @Transactional
     public void EditPayment(Payment payment,Parent parent) {
-        paymentRepository.save(payment);
+        payment.setId(parent.getPayment().getId());
+        payment.setParent(parent);
+        paymentRepository.saveAndFlush(payment);
         parent.setPayment(payment);
         parentRepository.save(parent);
+    }
+
+
+    @Transactional
+    public void cancelPayment(Payment payment,Parent parent) {
+        parent.setPayment(null);
+        parentRepository.save(parent);
+        paymentRepository.delete(payment);
     }
 
 }

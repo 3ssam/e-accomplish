@@ -39,9 +39,6 @@ public class Payment {
     @NotBlank(message = "This field is required field")
     private String type;
 
-    private boolean active;
-
     @OneToOne()
     private Parent parent;
-
 }

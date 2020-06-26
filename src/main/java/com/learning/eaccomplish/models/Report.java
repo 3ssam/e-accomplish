@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -28,8 +29,8 @@ public class Report {
     @JoinColumn(name = "quiz_id", referencedColumnName = "id")
     private Quiz quiz;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "report")
-    private List<Result> results;
+    @OneToMany(mappedBy = "report",fetch = FetchType.LAZY)
+    private List<Result> results = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "child_id", referencedColumnName = "id")

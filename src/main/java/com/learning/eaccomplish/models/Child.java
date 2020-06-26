@@ -19,18 +19,18 @@ public class Child {
 
     private String pinCode;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "child")
+    @OneToMany(mappedBy = "child")
     private List<Report> reports;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Parent parent;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "quiz_id", referencedColumnName = "id")
     private Quiz lastQuiz;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     private Question lastQuestion;
 

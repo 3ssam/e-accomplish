@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -38,7 +39,7 @@ public class Parent{
     @JoinColumn(name = "role_id",referencedColumnName = "id")
     private Role role;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
-    private List<Child> children;
+    @OneToMany(mappedBy = "parent",fetch = FetchType.EAGER)
+    private List<Child> children = new ArrayList<>();
 
 }

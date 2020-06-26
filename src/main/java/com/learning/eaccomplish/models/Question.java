@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -35,10 +36,10 @@ public class Question {
     @JoinColumn(name = "quiz_id", referencedColumnName = "id")
     private Quiz quiz;
 
-    @OneToOne(mappedBy = "question",fetch = FetchType.LAZY)
+    @OneToOne()
     private Result result;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lastQuestion")
-    private List<Child> children;
+    @OneToMany(mappedBy = "lastQuestion",fetch = FetchType.LAZY)
+    private List<Child> children = new ArrayList<>();
 
 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -17,13 +18,13 @@ public class Quiz {
 
     private String Level;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "quiz")
-    private List<Question> questions;
+    @OneToMany(mappedBy = "quiz",fetch = FetchType.LAZY)
+    private List<Question> questions = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "quiz")
-    private List<Report> reports;
+    @OneToMany(mappedBy = "quiz",fetch = FetchType.LAZY)
+    private List<Report> reports = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lastQuiz")
-    private List<Child> children;
+    @OneToMany(mappedBy = "lastQuiz",fetch = FetchType.LAZY)
+    private List<Child> children = new ArrayList<>();
 
 }

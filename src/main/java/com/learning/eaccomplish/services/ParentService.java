@@ -1,14 +1,16 @@
 package com.learning.eaccomplish.services;
 
+import com.learning.eaccomplish.models.Child;
 import com.learning.eaccomplish.models.Parent;
 import com.learning.eaccomplish.repositories.ParentRepository;
 import com.learning.eaccomplish.repositories.RoleRepository;
-import com.learning.eaccomplish.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ParentService {
@@ -18,8 +20,6 @@ public class ParentService {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private UserRepository UserRepository;
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
 
@@ -27,9 +27,10 @@ public class ParentService {
     public void createParent(Parent parent) {
         parent.setActivated(true);
         parent.setFullChild(false);
+        List<Child> children = new ArrayList<>();
+        parent.setChildren(children);
         parent.setPassword(passwordEncoder.encode(parent.getPassword()));
         parent.setRole(roleRepository.getByRoleName("PARENT"));
-        UserRepository.save(parent);
         parentRepository.save(parent);
     }
 
@@ -50,14 +51,22 @@ public class ParentService {
         Parent parent = parentRepository.getOne(id);
         if (parent == null)
             throw new IllegalArgumentException("Invalid Parent Id:" + id);
-        UserRepository.delete(parent);
         parentRepository.delete(parent);
     }
 
     @Transactional
     public void EditParent(Parent parent) {
-        UserRepository.save(parent);
         parentRepository.save(parent);
     }
+
+//    @Transactional
+//    public void addChild(Child child, Parent parent) {
+//        List<Child> children = parent.getChildren();
+//        children.add(child);
+//        parent.setChildren(children);
+//        if (children.size() == 2)
+//            parent.setFullChild(true);
+//        parentRepository.save(parent);
+//    }
 
 }

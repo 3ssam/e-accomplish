@@ -15,8 +15,7 @@ public class Result {
 
     private String state;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id", referencedColumnName = "id")
+    @OneToOne()
     private Question question;
 
     @ManyToOne(fetch = FetchType.LAZY)
