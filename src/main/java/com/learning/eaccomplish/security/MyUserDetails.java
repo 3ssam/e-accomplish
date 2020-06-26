@@ -7,13 +7,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
-public class UserPriencipal implements UserDetails {
+public class MyUserDetails implements UserDetails {
 
     private User user;
+    private long id;
+    private String name;
+    private String email;
+    private String password;
+    private boolean activated;
 
-    public UserPriencipal(User user) {
+    public MyUserDetails(User user) {
         this.user = user;
+        this.id = user.getId();
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.activated = user.getActivated();
     }
 
     @Override
@@ -23,12 +34,12 @@ public class UserPriencipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return email;
     }
 
     @Override
@@ -48,6 +59,28 @@ public class UserPriencipal implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return activated;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+
 }
