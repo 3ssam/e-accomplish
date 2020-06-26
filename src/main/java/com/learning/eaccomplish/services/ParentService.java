@@ -40,7 +40,7 @@ public class ParentService {
     }
 
     public Parent getParent(Long id) {
-        Parent parent = parentRepository.getOne(id);
+        Parent parent = parentRepository.findById(id).get();
         if (parent == null)
             throw new IllegalArgumentException("Invalid Parent Id:" + id);
         return parent;

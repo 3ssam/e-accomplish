@@ -25,16 +25,22 @@ public class ChildService {
 
 
     @Transactional
-    public void createChild(Child child,Parent parent) {
+    public void createChild(Child child, Parent parent) {
         child.setParent(parent);
         child.setLastQuestion(questionRepository.getOne(201L));
         child.setLastQuiz(quizRepository.getOne(1L));
         childRepository.save(child);
+//        List<Child> children = parent.getChildren();
+//        children.add(child);
+//        parent.setChildren(children);
+//        if (children.size() == 2)
+//            parent.setFullChild(true);
+//        parentRepository.save(parent);
     }
 
 
-    public Child getChild(String name,String pinCode) {
-        Child child = childRepository.getByNameAndPinCode(name,pinCode);
+    public Child getChild(String name, String pinCode) {
+        Child child = childRepository.getByNameAndPinCode(name, pinCode);
         return child;
     }
 
@@ -45,11 +51,11 @@ public class ChildService {
     }
 
     @Transactional
-    public void deleteParent(Long id) {
-        Parent parent = parentRepository.getOne(id);
-        if (parent == null)
-            throw new IllegalArgumentException("Invalid Parent Id:" + id);
-        parentRepository.delete(parent);
+    public void deleteChild(Long id) {
+        Child child = childRepository.getOne(id);
+        if (child == null)
+            throw new IllegalArgumentException("Invalid Child Id:" + id);
+        childRepository.delete(child);
     }
 
     @Transactional

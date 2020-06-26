@@ -15,6 +15,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -37,7 +39,6 @@ public class HomeController {
             return "AddChild";
         Parent parent = CurrentUser.getUser();
         childService.createChild(child,parent);
-        //parentService.addChild(child,parent);
         return "HomePage";
     }
 
@@ -61,7 +62,7 @@ public class HomeController {
 
     @GetMapping()
     public String home(@RequestParam(required = false) String choose, Model model) {
-        Parent parent = CurrentUser.getUser();
+        Parent parent = parentService.getParent(CurrentUser.getId());
         if (choose == null)
             return "HomePage";
         if (choose.equalsIgnoreCase("Deactivated")) {
@@ -85,11 +86,23 @@ public class HomeController {
             return "EditPayment";
         }
         else if (choose.equalsIgnoreCase("Children")){
+            List<Child> childrens = parent.getChildren();
+            model.addAttribute("childrens", childrens);
+            model.addAttribute("isFull", false);
+
+            return "ShowChildern";
+        }
+        else if (choose.equalsIgnoreCase("addChild")){
+            if (parent.getChildren().size() == 2){
+                List<Child> childrens = parent.getChildren();
+                model.addAttribute("childrens", childrens);
+                model.addAttribute("isFull", true);
+                return "ShowChildern";
+            }
             Child child = new Child();
             model.addAttribute("child", child);
             return "AddChild";
         }
-//        else if (choose.equalsIgnoreCase("Quiz"));
         return "HomePage";
     }
 
@@ -107,5 +120,16 @@ public class HomeController {
             model.addAttribute("isLocked", true);
         return "Login";
     }
+
+    @RequestMapping("child/delete/{id}")
+    public String deleteChild(@PathVariable("id") long id, Model model) {
+        childService.deleteChild(id);
+//        Parent parent = parentService.getParent(CurrentUser.getId());
+//        List<Child> childrens = parent.getChildren();
+//        model.addAttribute("childrens", childrens);
+//        model.addAttribute("isFull", false);
+        return "HomePage";
+    }
+
 
 }
