@@ -20,8 +20,9 @@
         <div class="card-body">
             <div class="col-md-10">
                 <form th:action="@{/login}" method="post">
+                    <p th:if="${isLocked == true}" style="color: red">account is locked now.</p>
                     <div th:if="${param.error}" class="alert alert-error" style="color: red">
-                        Invalid username and password.
+                        Invalid username and password or account is locked
                     </div>
                     <div th:if="${param.logout}" class="alert alert-success" style="color: greenyellow">
                         You have been logged out.
