@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Add User</title>
+    <title>Add Child</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -28,7 +28,7 @@
                                 th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-8">
-                            <label for="pinCode" class="col-form-label">Email</label> <input type="text"
+                            <label for="pinCode" class="col-form-label">Pin Code</label> <input type="text"
                                                                                            th:field="*{pinCode}"
                                                                                            class="form-control"
                                                                                            id="pinCode"
@@ -44,6 +44,10 @@
 
                     </div>
                 </form>
+                <div class="col-md-10">
+                    <a href="/" class="btn btn-primary" style="margin: 1%">Return to Home</a>
+                </div>
+
             </div>
         </div>
     </div>

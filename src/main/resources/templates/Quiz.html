@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Quiz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
+</head>
+
+<body>
+<div class="container my-5">
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+                <form action="#" th:action="@{/answer}" th:object="${result}" method="post">
+                    <div class="col-md-10">
+                        <h5 style="align-content: center"><p th:text="'Quiz ' + ${currentQuiz.level}"></p></h5>
+                    </div>
+                    <div class="col-md-10">
+                        <h5 style="align-content: center"><p th:text="'Question ' + ${currentReport.totalNumber+1}"></p></h5>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label for="state" class="col-form-label" th:text="${fullQuestion}"></label> <input type="number" th:field="*{state}"
+                                                                                         class="form-control" id="state"
+                                                                                         placeholder="Answer"> <span
+                                th:if="${#fields.hasErrors('state')}" th:errors="*{state}" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input th:if="${next == false}" type="submit" class="btn btn-primary" value="Submit Answer">
+                        </div>
+
+                        <div th:if="${next == true}" th:switch="${answer}">
+                            <p th:case="true" style="color: lawngreen">Right Answer</p>
+                            <p th:case="false" style="color: red">Wrong Answer</p>
+                        </div>
+
+
+                        <div class="form-group col-md-8"></div>
+
+                    </div>
+                </form>
+                <div class="col-md-10">
+                    <a th:if="${next == true}" href="/quiz" class="btn btn-primary" style="margin: 1%">Next Question</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
