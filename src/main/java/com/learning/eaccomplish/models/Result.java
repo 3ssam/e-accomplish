@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Setter
 @Getter
@@ -13,6 +14,7 @@ public class Result {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotBlank(message = "You Should add Your Answer")
     private String state;
 
     @OneToOne()

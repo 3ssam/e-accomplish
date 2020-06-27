@@ -59,8 +59,8 @@ public class ChildService {
     }
 
     @Transactional
-    public void EditParent(Parent parent) {
-        parentRepository.save(parent);
+    public void EditChild(Child child) {
+        childRepository.save(child);
     }
 
 }

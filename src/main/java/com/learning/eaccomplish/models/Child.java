@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Setter
@@ -17,6 +18,7 @@ public class Child {
 
     private String name;
 
+    @Size(max = 4,min = 4,message = "Pin Code Should be 4 digit")
     private String pinCode;
 
     @OneToMany(mappedBy = "child")

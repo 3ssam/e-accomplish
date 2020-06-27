@@ -25,7 +25,7 @@ public class Report {
 
     private String date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "quiz_id", referencedColumnName = "id")
     private Quiz quiz;
 
