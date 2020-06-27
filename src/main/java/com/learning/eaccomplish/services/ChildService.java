@@ -39,8 +39,13 @@ public class ChildService {
     }
 
 
-    public Child getChild(String name, String pinCode,Parent parent) {
-        Child child = childRepository.getByNameAndPinCodeAndParent(name, pinCode,parent);
+    public Child getChild(String name, String pinCode, Parent parent) {
+        Child child = childRepository.getByNameAndPinCodeAndParent(name, pinCode, parent);
+        return child;
+    }
+
+    public Child getChild(long id) {
+        Child child = childRepository.findById(id).get();
         return child;
     }
 

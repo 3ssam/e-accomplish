@@ -17,7 +17,7 @@ public class Result {
     @NotBlank(message = "You Should add Your Answer")
     private String state;
 
-    @OneToOne()
+    @OneToOne(fetch = FetchType.EAGER)
     private Question question;
 
     @ManyToOne(fetch = FetchType.EAGER)

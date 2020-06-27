@@ -47,6 +47,12 @@ public class ReportService {
         return report;
     }
 
+    public List<Report> getReport(Child child) {
+        List<Report> report = reportRepository.findAllByChild(child);
+        return report;
+    }
+
+
 
     public Report getReport(Long id) {
         Report report = reportRepository.findById(id).get();

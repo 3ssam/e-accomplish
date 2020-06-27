@@ -48,6 +48,10 @@ public class ResultService {
         return quiz;
     }
 
+    public  List<Result> getResult(Report report){
+        List<Result> results = resultRepository.findAllByReport(report);
+        return  results;
+    }
 
 //    @Transactional
 //    public void deleteParent(Long id) {

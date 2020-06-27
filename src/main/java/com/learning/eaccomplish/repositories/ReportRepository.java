@@ -14,4 +14,6 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
     Report findByChildAndQuiz(Child child, Quiz quiz);
 
     List<Report> findByChildAndDate(Child child, String date);
+
+    List<Report> findAllByChild(Child child);
 }
